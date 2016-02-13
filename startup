@@ -1,0 +1,31 @@
+#!/bin/sh
+
+if [ -z "$DBPASS" ]; then
+  echo "Mariadb database password must be set !"
+  exit 1
+fi
+
+if [ -z "$SALT" ]; then
+  echo "Salt does not exist !"
+  exit 1
+fi
+
+# Create user and set permission
+addgroup -g ${GID} selfoss && adduser -h /selfoss -s /bin/sh -D -G selfoss -u ${UID} selfoss
+
+# Selfoss custom configuration file
+cat > /selfoss/config.ini <<EOF
+[globals]
+db_type=mysql
+db_host=${DBHOST}
+db_database=${DBNAME}
+db_username=${DBUSER}
+db_password=${DBPASS}
+salt=${SALT}
+EOF
+
+# Set permissions
+chown -R selfoss:selfoss /selfoss /var/run/php-fpm.sock /var/lib/nginx /tmp
+
+# RUN !
+supervisord -c /etc/supervisor/supervisord.conf
