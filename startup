@@ -6,7 +6,7 @@ if [ -z "$DBPASS" ]; then
 fi
 
 if [ -z "$SALT" ]; then
-  echo "Salt does not exist !"
+  echo "Salt does isn't defined !"
   exit 1
 fi
 
@@ -22,7 +22,13 @@ db_database=${DBNAME}
 db_username=${DBUSER}
 db_password=${DBPASS}
 salt=${SALT}
+base_url=/
 EOF
+
+# Init data dir
+if [ ! "$(ls -A /selfoss/data)" ]; then
+   cd /selfoss/data/ && mkdir cache favicons logs sqlite thumbnails
+fi
 
 # Set permissions
 chown -R selfoss:selfoss /selfoss /var/run/php-fpm.sock /var/lib/nginx /tmp

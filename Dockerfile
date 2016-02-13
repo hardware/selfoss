@@ -3,14 +3,17 @@ MAINTAINER Hardware <contact@meshup.net>
 
 ENV GID=991 UID=991 VERSION=2.14 DBHOST=mariadb DBUSER=selfoss DBNAME=selfoss
 
-RUN echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
- && apk -U add \
+RUN echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+ && echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+
+RUN apk -U add \
     nginx \
     php-fpm \
     php-gd \
-    php-mysql \
-    php-mysqli \
+    php-json \
+    php-pdo_mysql \
     supervisor \
+    libressl@testing \
     tini@commuedge \
  && rm -f /var/cache/apk/*
 
@@ -25,6 +28,6 @@ COPY startup /usr/local/bin/startup
 
 RUN chmod +x /usr/local/bin/startup
 
+VOLUME /selfoss/data
 EXPOSE 80
-
 CMD ["/usr/bin/tini","--","/usr/local/bin/startup"]
