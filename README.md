@@ -13,13 +13,15 @@ The new multipurpose rss reader, live stream, mashup, aggregation web applicatio
 
 ```
 docker run -d \
-  --name selfoss
+  --name selfoss \
   -p 80:80 \
-  -e DBHOST=mysql \
+  -e DBHOST=mariadb \
   -e DBUSER=selfoss \
   -e DBNAME=selfoss \
   -e DBPASS=xxxxxxx \
   -e SALT=xxxxxxx \
+  --link mariadb:mariadb \
+  -v /mnt/docker/selfoss:/selfoss/data
   hardware/selfoss
 ```
 
@@ -51,6 +53,8 @@ selfoss:
     - DBNAME=selfoss
     - DBPASS=xxxxxxx
     - SALT=xxxxxxx
+  volumes:
+    - /mnt/docker/selfoss:/selfoss/data
 
 mariadb:
   image: mariadb:10.1
