@@ -7,15 +7,25 @@ RUN echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/re
  && echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 
 RUN apk -U add \
+    musl \
     nginx \
     php-fpm \
     php-gd \
     php-json \
+    php-zlib \
+    php-xml \
+    php-dom \
+    php-curl \
+    php-iconv \
+    php-mcrypt \
     php-pdo_mysql \
+    php-pdo_sqlite \
+    php-ctype \
     supervisor \
     libressl@testing \
     tini@commuedge \
- && rm -f /var/cache/apk/*
+ && rm -f /var/cache/apk/* \
+ && sed -i -e 's/max_execution_time = 30/max_execution_time = 300/' /etc/php/php.ini
 
 RUN wget -q https://github.com/SSilence/selfoss/releases/download/$VERSION/selfoss-$VERSION.zip -P /tmp \
  && mkdir /selfoss && unzip -q /tmp/selfoss-$VERSION.zip -d /selfoss \
