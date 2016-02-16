@@ -1,12 +1,10 @@
 FROM alpine:3.3
 MAINTAINER Hardware <contact@meshup.net>
 
-ENV GID=991 UID=991 VERSION=2.14 DBHOST=mariadb DBUSER=selfoss DBNAME=selfoss
+ENV GID=991 UID=991 VERSION=2.14
 
-RUN echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
- && echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
-
-RUN apk -U add \
+RUN echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+ && apk -U add \
     musl \
     nginx \
     php-fpm \
@@ -18,11 +16,10 @@ RUN apk -U add \
     php-curl \
     php-iconv \
     php-mcrypt \
-    php-pdo_mysql \
     php-pdo_sqlite \
     php-ctype \
     supervisor \
-    libressl@testing \
+    ca-certificates \
     tini@commuedge \
  && rm -f /var/cache/apk/* \
  && sed -i -e 's/max_execution_time = 30/max_execution_time = 300/' /etc/php/php.ini
