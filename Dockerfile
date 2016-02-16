@@ -35,8 +35,9 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY php-fpm.conf /etc/php/php-fpm.conf
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 COPY startup /usr/local/bin/startup
+COPY cron /etc/periodic/15min/selfoss
 
-RUN chmod +x /usr/local/bin/startup
+RUN chmod +x /usr/local/bin/startup /etc/periodic/15min/selfoss
 
 VOLUME /selfoss/data
 EXPOSE 80
