@@ -1,7 +1,7 @@
 FROM alpine:3.3
 MAINTAINER Hardware <contact@meshup.net>
 
-ENV GID=991 UID=991 VERSION=2.14
+ENV GID=991 UID=991 VERSION=2.15
 
 RUN echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
  && apk -U add \
