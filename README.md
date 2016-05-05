@@ -13,7 +13,6 @@ The new multipurpose rss reader, live stream, mashup, aggregation web applicatio
 ```
 docker run -d \
   --name selfoss \
-  -p 80:80 \
   -v /mnt/docker/selfoss:/selfoss/data \
   hardware/selfoss
 ```
@@ -32,8 +31,6 @@ docker run -d \
 selfoss:
   image: hardware/selfoss
   container_name: selfoss
-  ports:
-    - "80:80"
   volumes:
     - /mnt/docker/selfoss:/selfoss/data
 ```
@@ -43,3 +40,7 @@ selfoss:
 ```
 docker-compose up -d
 ```
+
+### Reverse proxy
+
+https://github.com/Wonderfall/dockerfiles/tree/master/reverse
