@@ -17,9 +17,12 @@ docker run -d \
   hardware/selfoss
 ```
 
+### Build-time variables
+
+- **VERSION** = selfoss version
+
 ### Environment variables
 
-- **VERSION** = selfoss version (*optional*, default: 2.15)
 - **GID** = selfoss user id (*optional*, default: 991)
 - **UID** = selfoss group id (*optional*, default: 991)
 
