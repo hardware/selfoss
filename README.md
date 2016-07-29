@@ -46,4 +46,4 @@ docker-compose up -d
 
 ### Reverse proxy
 
-https://github.com/Wonderfall/dockerfiles/tree/master/reverse
+https://github.com/Wonderfall/dockerfiles/tree/master/nginx

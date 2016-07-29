@@ -5,7 +5,7 @@ addgroup -g ${GID} selfoss && adduser -h /selfoss -s /bin/sh -D -G selfoss -u ${
 
 # Selfoss custom configuration file
 sed -i "s/lkjl1289/`cat \/dev\/urandom | tr -dc 'a-zA-Z' | fold -w 20 | head -n 1`/g" /selfoss/defaults.ini
-rm /selfoss/config.ini
+rm -f /selfoss/config.ini
 
 if [ -e /selfoss/data/config.ini ]; then
   cp /selfoss/data/config.ini /selfoss/config.ini
@@ -20,7 +20,7 @@ if [ ! "$(ls -Ad /selfoss/data/*/)" ]; then
 fi
 
 # Set permissions
-chown -R selfoss:selfoss /selfoss /var/run/php-fpm.sock /var/lib/nginx /tmp
+chown -R selfoss:selfoss /selfoss /var/lib/nginx
 
 # RUN !
 supervisord -c /etc/supervisor/supervisord.conf
