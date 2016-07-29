@@ -36,6 +36,10 @@ RUN echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/ap
  && wget -q https://github.com/SSilence/selfoss/releases/download/$VERSION/selfoss-$VERSION.zip -P /tmp \
  && mkdir /selfoss && unzip -q /tmp/selfoss-$VERSION.zip -d /selfoss \
  && sed -i -e 's/base_url=/base_url=\//g' /selfoss/defaults.ini \
+  # --------------- TEMPORARY PHP7 FIX ---------------
+ && git clone -q https://github.com/bcosca/fatfree --depth=1 /tmp/f3 \
+ && rm -rf /selfoss/libs/f3/* && mv /tmp/f3/lib/* /selfoss/libs/f3/ \
+ # ---------------------------------------------
  && apk del ${BUILD_DEPS} \
  && rm -rf /var/cache/apk/* /tmp/*
 
