@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM alpine:edge
 MAINTAINER Hardware <contact@meshup.net>
 MAINTAINER Wonderfall <wonderfall@schrodinger.io>
 
@@ -8,11 +8,16 @@ ENV GID=991 UID=991
 
 RUN echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
  && echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
- && echo "@edge http://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
+ && BUILD_DEPS=" \
+    wget \
+    git" \
  && apk -U add \
+    ${BUILD_DEPS} \
     musl \
     nginx \
-    libwebp@edge \
+    libwebp \
+    supervisor \
+    ca-certificates \
     php7@testing \
     php7-fpm@testing \
     php7-gd@testing \
@@ -26,16 +31,13 @@ RUN echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/ap
     php7-pdo_sqlite@testing \
     php7-ctype@testing \
     php7-session@testing \
-    supervisor \
-    ca-certificates \
     tini@commuedge \
- && rm -f /var/cache/apk/* \
- && sed -i -e 's/max_execution_time = 30/max_execution_time = 300/' /etc/php7/php.ini
-
-RUN wget -q https://github.com/SSilence/selfoss/releases/download/$VERSION/selfoss-$VERSION.zip -P /tmp \
+ && sed -i 's/max_execution_time = 30/max_execution_time = 300/' /etc/php7/php.ini \
+ && wget -q https://github.com/SSilence/selfoss/releases/download/$VERSION/selfoss-$VERSION.zip -P /tmp \
  && mkdir /selfoss && unzip -q /tmp/selfoss-$VERSION.zip -d /selfoss \
  && sed -i -e 's/base_url=/base_url=\//g' /selfoss/defaults.ini \
- && rm -rf /tmp/*
+ && apk del ${BUILD_DEPS} \
+ && rm -rf /var/cache/apk/* /tmp/*
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY php-fpm.conf /etc/php7/php-fpm.conf
