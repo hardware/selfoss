@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:3.4
 MAINTAINER Hardware <contact@meshup.net>
 MAINTAINER Wonderfall <wonderfall@schrodinger.io>
 
@@ -7,7 +7,6 @@ ARG VERSION=2.15
 ENV GID=991 UID=991
 
 RUN echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
- && echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
  && BUILD_DEPS=" \
     wget \
     git" \
@@ -18,25 +17,25 @@ RUN echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/ap
     libwebp \
     supervisor \
     ca-certificates \
-    php7@testing \
-    php7-fpm@testing \
-    php7-gd@testing \
-    php7-json@testing \
-    php7-zlib@testing \
-    php7-xml@testing \
-    php7-dom@testing \
-    php7-curl@testing \
-    php7-iconv@testing \
-    php7-mcrypt@testing \
-    php7-pdo_sqlite@testing \
-    php7-ctype@testing \
-    php7-session@testing \
+    php7@commuedge \
+    php7-fpm@commuedge \
+    php7-gd@commuedge \
+    php7-json@commuedge \
+    php7-zlib@commuedge \
+    php7-xml@commuedge \
+    php7-dom@commuedge \
+    php7-curl@commuedge \
+    php7-iconv@commuedge \
+    php7-mcrypt@commuedge \
+    php7-pdo_sqlite@commuedge \
+    php7-ctype@commuedge \
+    php7-session@commuedge \
     tini@commuedge \
  && sed -i 's/max_execution_time = 30/max_execution_time = 300/' /etc/php7/php.ini \
  && wget -q https://github.com/SSilence/selfoss/releases/download/$VERSION/selfoss-$VERSION.zip -P /tmp \
  && mkdir /selfoss && unzip -q /tmp/selfoss-$VERSION.zip -d /selfoss \
  && sed -i -e 's/base_url=/base_url=\//g' /selfoss/defaults.ini \
-  # --------------- TEMPORARY PHP7 FIX ---------------
+ # --------------- TEMPORARY PHP7 FIX ---------------
  && git clone -q https://github.com/bcosca/fatfree --depth=1 /tmp/f3 \
  && rm -rf /selfoss/libs/f3/* && mv /tmp/f3/lib/* /selfoss/libs/f3/ \
  # ---------------------------------------------
