@@ -3,6 +3,9 @@
 # Set permissions
 chown -R $UID:$GID /selfoss /etc/nginx /etc/php7 /var/log /var/lib/nginx /tmp /etc/s6.d
 
+# Set cron period
+sed -i "s/<CRON_PERIOD>/$CRON_PERIOD/g" /etc/s6.d/cron/run
+
 # Selfoss custom configuration file
 sed -i "s/lkjl1289/`cat \/dev\/urandom | tr -dc 'a-zA-Z' | fold -w 20 | head -n 1`/g" /selfoss/defaults.ini
 rm -f /selfoss/config.ini

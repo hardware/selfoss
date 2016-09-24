@@ -3,7 +3,7 @@ MAINTAINER Hardware <contact@meshup.net>
 
 ARG VERSION=2.15
 
-ENV GID=991 UID=991
+ENV GID=991 UID=991 CRON_PERIOD=15m
 
 RUN echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
  && BUILD_DEPS=" \
@@ -46,9 +46,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY php-fpm.conf /etc/php7/php-fpm.conf
 COPY s6.d /etc/s6.d
 COPY run.sh /usr/local/bin/run.sh
-COPY cron /etc/periodic/15min/selfoss
 
-RUN chmod +x /usr/local/bin/run.sh /etc/periodic/15min/selfoss /etc/s6.d/*/* /etc/s6.d/.s6-svscan/*
+RUN chmod +x /usr/local/bin/run.sh /etc/s6.d/*/* /etc/s6.d/.s6-svscan/*
 
 VOLUME /selfoss/data
 
