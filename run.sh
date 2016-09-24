@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Create user and set permission
-addgroup -g ${GID} selfoss && adduser -h /selfoss -s /bin/sh -D -G selfoss -u ${UID} selfoss
+# Set permissions
+chown -R $UID:$GID /selfoss /etc/nginx /etc/php7 /var/log /var/lib/nginx /tmp /etc/s6.d
 
 # Selfoss custom configuration file
 sed -i "s/lkjl1289/`cat \/dev\/urandom | tr -dc 'a-zA-Z' | fold -w 20 | head -n 1`/g" /selfoss/defaults.ini
@@ -19,8 +19,5 @@ if [ ! "$(ls -Ad /selfoss/data/*/)" ]; then
    cd /selfoss/data/ && mkdir cache favicons logs sqlite thumbnails
 fi
 
-# Set permissions
-chown -R selfoss:selfoss /selfoss /var/lib/nginx
-
 # RUN !
-supervisord -c /etc/supervisor/supervisord.conf
+exec su-exec $UID:$GID /bin/s6-svscan /etc/s6.d

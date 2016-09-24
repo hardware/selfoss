@@ -2,29 +2,36 @@
 
 ![selfoss](https://i.imgur.com/8hJyBgk.png "selfoss")
 
+### What is this ?
+
 The new multipurpose rss reader, live stream, mashup, aggregation web application.
 
-### Requirement
+### Features
 
-- Docker 1.0 or higher
-
-### How to use
-
-```
-docker run -d \
-  --name selfoss \
-  -v /mnt/docker/selfoss:/selfoss/data \
-  hardware/selfoss
-```
+- Lightweight & secure image (no root process)
+- Based on Alpine Linux 3.4
+- Latest Selfoss version (2.15)
+- SQLite driver
+- With Nginx and PHP7
 
 ### Build-time variables
 
-- **VERSION** = selfoss version
+- **VERSION** = selfoss version (default: **2.15**)
+
+### Ports
+
+- 8888
 
 ### Environment variables
 
-- **GID** = selfoss user id (*optional*, default: 991)
-- **UID** = selfoss group id (*optional*, default: 991)
+| Variable | Description | Type | Default value |
+| -------- | ----------- | ---- | ------------- |
+| **GID** | selfoss user id | *optional* | 991
+| **UID** | selfoss group id | *optional* | 991
+
+### Reverse proxy
+
+https://github.com/Wonderfall/dockerfiles/tree/master/nginx
 
 ### Docker-compose
 
@@ -43,7 +50,3 @@ selfoss:
 ```
 docker-compose up -d
 ```
-
-### Reverse proxy
-
-https://github.com/Wonderfall/dockerfiles/tree/master/nginx

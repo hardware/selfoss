@@ -1,6 +1,5 @@
 FROM alpine:3.4
 MAINTAINER Hardware <contact@meshup.net>
-MAINTAINER Wonderfall <wonderfall@schrodinger.io>
 
 ARG VERSION=2.15
 
@@ -14,8 +13,9 @@ RUN echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/ap
     ${BUILD_DEPS} \
     musl \
     nginx \
+    s6 \
+    su-exec \
     libwebp \
-    supervisor \
     ca-certificates \
     php7@commuedge \
     php7-fpm@commuedge \
@@ -44,12 +44,14 @@ RUN echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/ap
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY php-fpm.conf /etc/php7/php-fpm.conf
-COPY supervisord.conf /etc/supervisor/supervisord.conf
-COPY startup /usr/local/bin/startup
+COPY s6.d /etc/s6.d
+COPY run.sh /usr/local/bin/run.sh
 COPY cron /etc/periodic/15min/selfoss
 
-RUN chmod +x /usr/local/bin/startup /etc/periodic/15min/selfoss
+RUN chmod +x /usr/local/bin/run.sh /etc/periodic/15min/selfoss /etc/s6.d/*/* /etc/s6.d/.s6-svscan/*
 
 VOLUME /selfoss/data
-EXPOSE 80
-CMD ["/sbin/tini","--","startup"]
+
+EXPOSE 8888
+
+CMD ["run.sh"]
