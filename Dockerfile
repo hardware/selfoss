@@ -30,6 +30,7 @@ RUN echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/ap
     php7-pdo_sqlite@commuedge \
     php7-ctype@commuedge \
     php7-session@commuedge \
+    php7-mbstring@commuedge \
     tini@commuedge \
  && sed -i 's/max_execution_time = 30/max_execution_time = 300/' /etc/php7/php.ini \
  && wget -q https://github.com/SSilence/selfoss/releases/download/$VERSION/selfoss-$VERSION.zip -P /tmp \
