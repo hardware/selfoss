@@ -26,8 +26,8 @@ The new multipurpose rss reader, live stream, mashup, aggregation web applicatio
 
 | Variable | Description | Type | Default value |
 | -------- | ----------- | ---- | ------------- |
-| **GID** | selfoss user id | *optional* | 991
-| **UID** | selfoss group id | *optional* | 991
+| **UID** | selfoss user id | *optional* | 991
+| **GID** | selfoss group id | *optional* | 991
 | **CRON_PERIOD** | Cronjob period for updating feeds | *optional* | 15m
 
 ### Reverse proxy
