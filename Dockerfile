@@ -1,11 +1,13 @@
-FROM alpine:3.4
-MAINTAINER Hardware <contact@meshup.net>
+FROM alpine:3.5
+
+LABEL description "Multipurpose rss reader, live stream, mashup, aggregation web application" \
+      maintainer="Hardware <contact@meshup.net>"
 
 ARG VERSION=2.16
 
 ENV GID=991 UID=991 CRON_PERIOD=15m
 
-RUN echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+RUN echo "@community http://nl.alpinelinux.org/alpine/v3.5/community" >> /etc/apk/repositories \
  && BUILD_DEPS=" \
     wget \
     git" \
@@ -17,21 +19,21 @@ RUN echo "@commuedge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/ap
     su-exec \
     libwebp \
     ca-certificates \
-    php7@commuedge \
-    php7-fpm@commuedge \
-    php7-gd@commuedge \
-    php7-json@commuedge \
-    php7-zlib@commuedge \
-    php7-xml@commuedge \
-    php7-dom@commuedge \
-    php7-curl@commuedge \
-    php7-iconv@commuedge \
-    php7-mcrypt@commuedge \
-    php7-pdo_sqlite@commuedge \
-    php7-ctype@commuedge \
-    php7-session@commuedge \
-    php7-mbstring@commuedge \
-    tini@commuedge \
+    php7@community \
+    php7-fpm@community \
+    php7-gd@community \
+    php7-json@community \
+    php7-zlib@community \
+    php7-xml@community \
+    php7-dom@community \
+    php7-curl@community \
+    php7-iconv@community \
+    php7-mcrypt@community \
+    php7-pdo_sqlite@community \
+    php7-ctype@community \
+    php7-session@community \
+    php7-mbstring@community \
+    tini@community \
  && sed -i 's/max_execution_time = 30/max_execution_time = 300/' /etc/php7/php.ini \
  && wget -q https://github.com/SSilence/selfoss/releases/download/$VERSION/selfoss-$VERSION.zip -P /tmp \
  && mkdir /selfoss && unzip -q /tmp/selfoss-$VERSION.zip -d /selfoss \

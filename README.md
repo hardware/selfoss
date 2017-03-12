@@ -9,7 +9,7 @@ The new multipurpose rss reader, live stream, mashup, aggregation web applicatio
 ### Features
 
 - Lightweight & secure image (no root process)
-- Based on Alpine Linux 3.4
+- Based on Alpine Linux 3.5
 - Latest Selfoss version (2.16)
 - SQLite driver
 - With Nginx and PHP7
