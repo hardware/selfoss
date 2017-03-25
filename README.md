@@ -9,14 +9,15 @@ The new multipurpose rss reader, live stream, mashup, aggregation web applicatio
 ### Features
 
 - Lightweight & secure image (no root process)
-- Based on Alpine Linux 3.5
-- Latest Selfoss version (2.16)
+- Based on Alpine Linux
+- Latest Selfoss version (2.17)
 - SQLite driver
 - With Nginx and PHP7
 
 ### Build-time variables
 
-- **VERSION** = selfoss version (default: **2.16**)
+- **VERSION** = selfoss version (default: **2.17**)
+- **SHA256_HASH** = SHA256 hash of selfoss archive
 
 ### Ports
 
@@ -32,7 +33,7 @@ The new multipurpose rss reader, live stream, mashup, aggregation web applicatio
 
 ### Reverse proxy
 
-https://github.com/Wonderfall/dockerfiles/tree/master/nginx
+https://github.com/Wonderfall/dockerfiles/tree/master/boring-nginx
 
 ### Docker-compose
 

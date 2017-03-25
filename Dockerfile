@@ -3,7 +3,8 @@ FROM alpine:3.5
 LABEL description "Multipurpose rss reader, live stream, mashup, aggregation web application" \
       maintainer="Hardware <contact@meshup.net>"
 
-ARG VERSION=2.16
+ARG VERSION=2.17
+ARG SHA256_HASH="5c880fe79326c0e584be21faeaebe805fac792f2c56b7fd5144584e5137a608d"
 
 ENV GID=991 UID=991 CRON_PERIOD=15m
 
@@ -36,6 +37,10 @@ RUN echo "@community http://nl.alpinelinux.org/alpine/v3.5/community" >> /etc/ap
     tini@community \
  && sed -i 's/max_execution_time = 30/max_execution_time = 300/' /etc/php7/php.ini \
  && wget -q https://github.com/SSilence/selfoss/releases/download/$VERSION/selfoss-$VERSION.zip -P /tmp \
+ && echo "Verifying integrity of selfoss-${VERSION}.zip..." \
+ && CHECKSUM=$(sha256sum /tmp/selfoss-$VERSION.zip | awk '{print $1}') \
+ && if [ "${CHECKSUM}" != "${SHA256_HASH}" ]; then echo "Warning! Checksum does not match!" && exit 1; fi \
+ && echo "All seems good, hash is valid." \
  && mkdir /selfoss && unzip -q /tmp/selfoss-$VERSION.zip -d /selfoss \
  && sed -i -e 's/base_url=/base_url=\//g' /selfoss/defaults.ini \
  && apk del ${BUILD_DEPS} \
