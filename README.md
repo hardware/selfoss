@@ -2,7 +2,7 @@
 
 ![selfoss](https://i.imgur.com/8hJyBgk.png "selfoss")
 
-### What is this ?
+### What is this ?
 
 The new multipurpose rss reader, live stream, mashup, aggregation web application.
 
