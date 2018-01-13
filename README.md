@@ -31,24 +31,12 @@ The new multipurpose rss reader, live stream, mashup, aggregation web applicatio
 | **GID** | selfoss group id | *optional* | 991
 | **CRON_PERIOD** | Cronjob period for updating feeds | *optional* | 15m
 
-### Reverse proxy
+### Docker-compose.yml
 
-https://github.com/Wonderfall/dockerfiles/tree/master/boring-nginx
-
-### Docker-compose
-
-#### Docker-compose.yml
-
-```
+```yml
 selfoss:
   image: hardware/selfoss
   container_name: selfoss
   volumes:
     - /mnt/docker/selfoss:/selfoss/data
-```
-
-#### Run !
-
-```
-docker-compose up -d
 ```
