@@ -30,6 +30,8 @@ RUN echo "@community http://nl.alpinelinux.org/alpine/v3.7/community" >> /etc/ap
     php7-curl@community \
     php7-iconv@community \
     php7-mcrypt@community \
+    php7-pdo_mysql@community \
+    php7-pdo_pgsql@community \
     php7-pdo_sqlite@community \
     php7-ctype@community \
     php7-session@community \
