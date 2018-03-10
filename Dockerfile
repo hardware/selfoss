@@ -3,8 +3,8 @@ FROM alpine:3.7
 LABEL description "Multipurpose rss reader, live stream, mashup, aggregation web application" \
       maintainer="Hardware <contact@meshup.net>"
 
-ARG VERSION=2.17
-ARG SHA256_HASH="5c880fe79326c0e584be21faeaebe805fac792f2c56b7fd5144584e5137a608d"
+ARG VERSION=2.18
+ARG SHA256_HASH="0b3d46b0b25170f99e3e29c9fc6a2e5235b0449fecbdad902583c919724aa6ed"
 
 ENV GID=991 UID=991 CRON_PERIOD=15m
 

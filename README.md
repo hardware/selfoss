@@ -10,13 +10,13 @@ The new multipurpose rss reader, live stream, mashup, aggregation web applicatio
 
 - Lightweight & secure image (no root process)
 - Based on Alpine Linux
-- Latest Selfoss version (2.17)
+- Latest Selfoss version (2.18)
 - SQLite driver
 - With Nginx and PHP7
 
 ### Build-time variables
 
-- **VERSION** = selfoss version (default: **2.17**)
+- **VERSION** = selfoss version
 - **SHA256_HASH** = SHA256 hash of selfoss archive
 
 ### Ports
