@@ -36,6 +36,7 @@ RUN echo "@community http://nl.alpinelinux.org/alpine/v3.7/community" >> /etc/ap
     php7-ctype@community \
     php7-session@community \
     php7-mbstring@community \
+    php7-simplexml@community \
     tini@community \
  && wget -q https://github.com/SSilence/selfoss/releases/download/$VERSION/selfoss-$VERSION.zip -P /tmp \
  && CHECKSUM=$(sha256sum /tmp/selfoss-$VERSION.zip | awk '{print $1}') \
