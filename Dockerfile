@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.8
 
 LABEL description "Multipurpose rss reader, live stream, mashup, aggregation web application" \
       maintainer="Hardware <contact@meshup.net>"
@@ -8,7 +8,7 @@ ARG SHA256_HASH="0b3d46b0b25170f99e3e29c9fc6a2e5235b0449fecbdad902583c919724aa6e
 
 ENV GID=991 UID=991 CRON_PERIOD=15m
 
-RUN echo "@community http://nl.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repositories \
+RUN echo "@community http://nl.alpinelinux.org/alpine/v3.8/community" >> /etc/apk/repositories \
  && apk -U upgrade \
  && apk add -t build-dependencies \
     wget \
