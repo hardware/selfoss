@@ -6,7 +6,7 @@ LABEL description "Multipurpose rss reader, live stream, mashup, aggregation web
 ARG VERSION=2.18
 ARG SHA256_HASH="0b3d46b0b25170f99e3e29c9fc6a2e5235b0449fecbdad902583c919724aa6ed"
 
-ENV GID=991 UID=991 CRON_PERIOD=15m
+ENV GID=991 UID=991 CRON_PERIOD=15m UPLOAD_MAX_SIZE=25M LOG_TO_STDOUT=false MEMORY_LIMIT=128M
 
 RUN echo "@community http://nl.alpinelinux.org/alpine/v3.8/community" >> /etc/apk/repositories \
  && apk -U upgrade \
@@ -37,6 +37,8 @@ RUN echo "@community http://nl.alpinelinux.org/alpine/v3.8/community" >> /etc/ap
     php7-session@community \
     php7-mbstring@community \
     php7-simplexml@community \
+    php7-xml \
+    php7-xmlwriter \
     tini@community \
  && wget -q https://github.com/SSilence/selfoss/releases/download/$VERSION/selfoss-$VERSION.zip -P /tmp \
  && CHECKSUM=$(sha256sum /tmp/selfoss-$VERSION.zip | awk '{print $1}') \

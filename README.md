@@ -30,6 +30,9 @@ The new multipurpose rss reader, live stream, mashup, aggregation web applicatio
 | **UID** | selfoss user id | *optional* | 991
 | **GID** | selfoss group id | *optional* | 991
 | **CRON_PERIOD** | Cronjob period for updating feeds | *optional* | 15m
+| **UPLOAD_MAX_SIZE** | Attachment size limit | *optional* | 25M
+| **LOG_TO_STDOUT** | Enable nginx and php error logs to stdout | *optional* | false
+| **MEMORY_LIMIT** | PHP memory limit | *optional* | 128M
 
 ### Docker-compose.yml
 
